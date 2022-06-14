@@ -5,4 +5,5 @@
     <string name="username">username</string>
     <string name="descrption">description.</string>
     <string name="description">description</string>
+    <string name="feed">Feed</string>
 </resources>

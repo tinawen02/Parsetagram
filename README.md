@@ -13,8 +13,8 @@ The following **required** functionality is completed:
 - [X] User can log in to their account
 - [X] The current signed in user is persisted across app restarts
 - [X] User can log out of their account
-- [ ] User can take a photo, add a caption, and post it to "Instagram"
-- [ ] User can view the last 20 posts submitted to "Instagram"
+- [X] User can take a photo, add a caption, and post it to "Instagram"
+- [X] User can view the last 20 posts submitted to "Instagram"
 - [ ] User can pull to refresh the last 20 posts submitted to "Instagram"
 - [ ] User can tap a post to go to a Post Details activity, which includes timestamp and caption.
 
@@ -40,7 +40,7 @@ The following **stretch** features are implemented:
 The following **additional** features are implemented:
 
 - [X] Added Instagram icon to home page
-- [ ] Resize each photo before uploading to Parse
+- [X] Resize each photo before uploading to Parse
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogout;
     private Button btnCaptureImage;
     private Button btnSubmit;
+    private Button btnFeed;
     private EditText etDescription;
     private ImageView ivPostImage;
     File photoFile;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnFeed = findViewById(R.id.btnFeed);
         etDescription = findViewById(R.id.etDescription);
         ivPostImage = findViewById(R.id.ivPostImage);
 
@@ -89,8 +91,19 @@ public class MainActivity extends AppCompatActivity {
                 savePost(description, currentUser, photoFile);
             }
         });
-        //queryPosts();
+
+        // Takes user to the activity feed upon click
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, FeedActivity.class);
+                startActivity(i);
+                //finish();
+            }
+        });
     }
+
+
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
         Post post = new Post();
