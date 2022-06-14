@@ -24,6 +24,7 @@ public class FeedActivity extends AppCompatActivity {
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     private SwipeRefreshLayout swipeContainer;
+    private List<Post> allPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,10 @@ public class FeedActivity extends AppCompatActivity {
                 android.R.color.holo_red_light);
 
         rvPosts = findViewById(R.id.rvPosts);
+        allPosts = new ArrayList<>();
 
         // Initialize the array that will hold posts and create a PostsAdapter
-        adapter = new PostsAdapter(this);
+        adapter = new PostsAdapter(this, allPosts);
 
         // Set the adapter on the recycler view
         rvPosts.setAdapter(adapter);

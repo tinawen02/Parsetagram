@@ -23,10 +23,11 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     private Context context;
-    private List<Post> posts = new ArrayList<>();
+    private List<Post> posts;
 
-    public PostsAdapter(Context context) {
+    public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
+        this.posts = posts;
     }
 
     @NonNull
@@ -39,20 +40,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(PostsAdapter.ViewHolder holder, int position) {
         Post post = posts.get(position);
-        // Bind the post data to the view elements
-        holder.tvDescription.setText(post.getDescription());
-        holder.tvUsername.setText(post.getUser().getUsername());
-        ParseFile image = post.getImage();
-        if (image != null) {
-            Glide.with(context).load(image.getUrl()).into(holder.ivImage);
-        } else {
-            holder.ivImage.setVisibility(View.GONE);
-        }
 
-        // Calculate relative date
-            Date createdAt = post.getCreatedAt();
-            String timeAgo = Post.calculateTimeAgo(createdAt);
-            holder.tvTimeStamp.setText(timeAgo);
+        holder.bind(post);
     }
 
     @Override
@@ -60,7 +49,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return posts.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvUsername;
         private ImageView ivImage;
@@ -69,14 +58,43 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
         }
 
-        @Override
+        public void bind(Post post) {
+            // Bind the post data to the view elements
+            tvUsername.setText(post.getUser().getUsername());
+            tvDescription.setText(post.getDescription());
+
+            ParseFile image = post.getImage();
+            if (image != null) {
+                Glide.with(context).load(image.getUrl()).into(ivImage);
+            } else {
+                ivImage.setVisibility(View.GONE);
+            }
+
+            ivImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PostDetailsActivity.class);
+                    // serialize the movie using parceler, use its short name as a key
+                    intent.putExtra("post", Parcels.wrap(post));
+                    // show the activity
+                    context.startActivity(intent);
+                }
+            });
+
+            // Calculate relative date
+            Date createdAt = post.getCreatedAt();
+            String timeAgo = Post.calculateTimeAgo(createdAt);
+            tvTimeStamp.setText(timeAgo);
+        }
+
+       /* @Override
         public void onClick(View v) {
             // gets item position
             int position = getAdapterPosition();
@@ -91,7 +109,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 // show the activity
                 context.startActivity(intent);
             }
-        }
+
+        }*/
     }
 
     // Clean all posts of the recycler
