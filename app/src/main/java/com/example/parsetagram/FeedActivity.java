@@ -3,13 +3,17 @@ package com.example.parsetagram;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
 
+import com.bumptech.glide.load.model.Headers;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +23,34 @@ public class FeedActivity extends AppCompatActivity {
     private static final String TAG = "FeedActivity";
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
-    protected List<Post> allPosts;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+        // Lookup the swipe container view
+        swipeContainer = findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                queryPosts();
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         rvPosts = findViewById(R.id.rvPosts);
 
         // Initialize the array that will hold posts and create a PostsAdapter
-        allPosts = new ArrayList<>();
-        adapter = new PostsAdapter(this, allPosts);
+        adapter = new PostsAdapter(this);
 
         // Set the adapter on the recycler view
         rvPosts.setAdapter(adapter);
@@ -48,7 +68,7 @@ public class FeedActivity extends AppCompatActivity {
         // Limit query to latest 20 items
         query.setLimit(20);
         // Order posts by creation date (newest first)
-        query.addDescendingOrder("createdAt");
+        query.addAscendingOrder("createdAt");
         // Start an asynchronous call for posts
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -65,9 +85,12 @@ public class FeedActivity extends AppCompatActivity {
                 }
 
                 // Save received posts to list and notify adapter of new data
-                allPosts.addAll(posts);
+                adapter.clear();
+                adapter.addAll(posts);
                 adapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
         });
     }
+
 }

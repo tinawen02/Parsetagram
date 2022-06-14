@@ -9,8 +9,9 @@
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.1413373860182371" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22925872802734376" />
+        <entry key="app/src/main/res/layout/activity_post_details.xml" value="0.1889564336372847" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_post.xml" value="0.2798812866210938" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/xml/fileprovider.xml" value="0.1" />
       </map>
