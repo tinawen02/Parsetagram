@@ -42,7 +42,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         tvUsernamePost.setText(post.getUser().getUsername());
         tvDescriptionPost.setText(post.getDescription());
 
-        Glide.with(this).load(post.getImage())
+        Glide.with(this).load(post.getImage().getUrl())
                 .into(ivPostImagePost);
 
 
