@@ -2,6 +2,7 @@ package com.example.parsetagram;
 
 import android.app.Application;
 
+import com.example.parsetagram.models.Post;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

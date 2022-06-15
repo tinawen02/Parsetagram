@@ -1,16 +1,14 @@
-package com.example.parsetagram;
+package com.example.parsetagram.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.parse.ParseFile;
+import com.example.parsetagram.models.Post;
+import com.example.parsetagram.R;
 
 import org.parceler.Parcels;
 

@@ -1,4 +1,4 @@
-package com.example.parsetagram;
+package com.example.parsetagram.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.parsetagram.models.Post;
+import com.example.parsetagram.R;
+import com.example.parsetagram.activities.PostDetailsActivity;
 import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

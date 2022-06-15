@@ -1,4 +1,4 @@
-package com.example.parsetagram;
+package com.example.parsetagram.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,12 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.parsetagram.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
     private Button btnSignup;
-    private TextView tvNoSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignup = findViewById(R.id.btnSignup);
-        tvNoSignup = findViewById(R.id.tvNoSignup);
-
 
         // Listens for a click from the user who is logging in
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -58,27 +54,10 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create the ParseUser
-                ParseUser user = new ParseUser();
-                // Set core properties
-
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-
-                user.setUsername(username);
-                user.setPassword(password);
-                // Invoke signUpInBackground
-                user.signUpInBackground(new SignUpCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            // Hooray! Let them use the app now.
-                            loginUser(username, password);
-                        } else {
-                            // Sign up didn't succeed. Look at the ParseException
-                            // to figure out what went wrong
-                        }
-                    }
-                });
+                Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(i);
+                // close this activity
+                finish();
             }
         });
     }

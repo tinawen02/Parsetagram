@@ -1,4 +1,4 @@
-package com.example.parsetagram;
+package com.example.parsetagram.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,12 +8,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.bumptech.glide.load.model.Headers;
+import com.example.parsetagram.models.Post;
+import com.example.parsetagram.adapters.PostsAdapter;
+import com.example.parsetagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;

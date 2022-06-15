@@ -1,4 +1,4 @@
-package com.example.parsetagram;
+package com.example.parsetagram.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.parsetagram.BitmapScaler;
+import com.example.parsetagram.models.Post;
+import com.example.parsetagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
