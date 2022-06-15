@@ -1,8 +1,10 @@
 package com.example.parsetagram.activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import com.example.parsetagram.BitmapScaler;
 import com.example.parsetagram.models.Post;
 import com.example.parsetagram.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnFeed;
     private EditText etDescription;
     private ImageView ivPostImage;
+    private BottomNavigationView bottomNavigationView;
     File photoFile;
     public String photoFileName = "photo.jpg";
 
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btnFeed = findViewById(R.id.btnFeed);
         etDescription = findViewById(R.id.etDescription);
         ivPostImage = findViewById(R.id.ivPostImage);
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
 
         // Logs a user out upon the click of the button
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +98,25 @@ public class MainActivity extends AppCompatActivity {
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, photoFile);
+            }
+        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_compose:
+                        Toast.makeText(MainActivity.this, "Compose!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_profile:
+                    default:
+                        Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
             }
         });
 

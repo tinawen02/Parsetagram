@@ -28,6 +28,9 @@
         android:theme="@style/Theme.Parsetagram"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ComposeCommentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignupActivity"
             android:exported="false" />
         <activity

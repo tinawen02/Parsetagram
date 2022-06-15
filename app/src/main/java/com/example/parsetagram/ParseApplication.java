@@ -2,6 +2,7 @@ package com.example.parsetagram;
 
 import android.app.Application;
 
+import com.example.parsetagram.models.Comment;
 import com.example.parsetagram.models.Post;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -16,7 +17,8 @@ public class ParseApplication extends Application {
 
         // Register parse models
         ParseObject.registerSubclass(Post.class);
-
+        ParseObject.registerSubclass(Comment.class);
+        //ParseObject.registerSubclass(User.class);
 
         // Use for troubleshooting -- remove this line for production
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
