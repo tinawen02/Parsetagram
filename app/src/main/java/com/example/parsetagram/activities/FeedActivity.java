@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.parsetagram.EndlessRecyclerViewScrollListener;
 import com.example.parsetagram.models.Post;
 import com.example.parsetagram.adapters.PostsAdapter;
 import com.example.parsetagram.R;
@@ -16,6 +17,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
@@ -25,6 +27,7 @@ public class FeedActivity extends AppCompatActivity {
     protected PostsAdapter adapter;
     private SwipeRefreshLayout swipeContainer;
     private List<Post> allPosts;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class FeedActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                queryPosts();
+                queryPosts(null);
             }
         });
 
@@ -58,19 +61,44 @@ public class FeedActivity extends AppCompatActivity {
         rvPosts.setAdapter(adapter);
         // Set the layout manager on the recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
+
+
+        // Configure Recycler view
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rvPosts.setLayoutManager(linearLayoutManager);
+        rvPosts.setAdapter(adapter);
+
         // Query posts from Parsetagram
-        queryPosts();
+        queryPosts(null);
+
+        // Used to allow endless scrolling
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggers when new data is appended to the list
+                queryPosts(allPosts.get(0).getCreatedAt());
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        rvPosts.addOnScrollListener(scrollListener);
+
     }
 
-    private void queryPosts() {
+    // Gets all of the posts
+    private void queryPosts(Date time) {
         // Specify what type of data we want to query - Post.class
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // Include data referred by user key
         query.include(Post.KEY_USER);
+
+        if(time != null) {
+            query.whereLessThan(Post.KEY_CREATED_AT, time);
+        }
         // Limit query to latest 20 items
         query.setLimit(20);
+
         // Order posts by creation date (newest first)
-        query.addAscendingOrder("createdAt");
+        query.addDescendingOrder("createdAt");
         // Start an asynchronous call for posts
         query.findInBackground(new FindCallback<Post>() {
             @Override
