@@ -43,6 +43,12 @@ public class PostDetailsActivity extends AppCompatActivity {
 
     Post post;
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        refreshComments();
+    }
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +96,10 @@ public class PostDetailsActivity extends AppCompatActivity {
             }
         });
 
+        refreshComments();
+    }
+
+    void refreshComments() {
         ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
         query.whereEqualTo(Comment.KEY_POST, post);
         query.orderByDescending("createdAt");
@@ -105,7 +115,5 @@ public class PostDetailsActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-
     }
-
 }
