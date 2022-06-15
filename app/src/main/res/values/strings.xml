@@ -6,4 +6,6 @@
     <string name="descrption">description.</string>
     <string name="description">description</string>
     <string name="feed">Feed</string>
+    <string name="sign_up">Sign up</string>
+    <string name="don_t_have_a_login">Don\'t have a login?</string>
 </resources>
