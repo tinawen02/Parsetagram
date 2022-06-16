@@ -79,12 +79,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 ivImage.setVisibility(View.GONE);
             }
 
+            String test = post.getUser().getUsername();
+
             ivImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PostDetailsActivity.class);
                     // serialize the movie using parceler, use its short name as a key
                     intent.putExtra("post", Parcels.wrap(post));
+                    intent.putExtra("test",test);
                     // show the activity
                     context.startActivity(intent);
                 }

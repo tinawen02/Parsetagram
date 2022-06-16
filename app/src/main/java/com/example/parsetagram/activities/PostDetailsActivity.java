@@ -21,10 +21,12 @@ import com.example.parsetagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
+import java.text.BreakIterator;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     private ImageButton ibCommentPost;
     private ImageButton ibHeartPost;
     private ImageButton ibSharePost;
+    private TextView tvLikesPost;
     private TextView tvUsernameDescriptionPost;
     RecyclerView rvComments;
     private CommentsAdapter adapter;
@@ -64,14 +67,19 @@ public class PostDetailsActivity extends AppCompatActivity {
         ibSharePost = findViewById(R.id.ibSharePost);
         tvUsernameDescriptionPost = findViewById(R.id.tvUsernameDescriptionPost);
         rvComments = findViewById(R.id.rvComments);
+        tvLikesPost = findViewById(R.id.tvLikesPost);
 
         adapter = new CommentsAdapter();
 
         // Unwrap the post passed in via intent, using its simple name as a key
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
+        String test = getIntent().getStringExtra("test");
+
 
         // Set all views
-        tvUsernamePost.setText(post.getUser().getUsername());
+        //tvUsernamePost.setText(post.getUser().getUsername());
+        tvUsernamePost.setText(test);
+
         tvDescriptionPost.setText(post.getDescription());
 
         Glide.with(this).load(post.getImage().getUrl())
@@ -81,7 +89,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         Date createdAt = post.getCreatedAt();
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimeStampPost.setText(timeAgo);
-        tvUsernameDescriptionPost.setText(post.getUser().getUsername());
+        //tvUsernameDescriptionPost.setText(post.getUser().getUsername());
         rvComments.setLayoutManager(new LinearLayoutManager(this));
         rvComments.setAdapter(adapter);
 
@@ -97,6 +105,28 @@ public class PostDetailsActivity extends AppCompatActivity {
         });
 
         refreshComments();
+
+        tvLikesPost.setText(post.getLikesCount());
+
+        // Allows a user to like
+        ibHeartPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (post.isLikedByCurrentUser()) {
+                    // unlike
+                    post.unlike();
+                    ibHeartPost.setBackground(getDrawable(R.drawable.ufi_heart));
+                } else {
+                    // like
+                    post.like();
+                    ibHeartPost.setBackground(getDrawable(R.drawable.ufi_heart_active));
+
+                }
+                tvLikesPost.setText(post.getLikesCount());
+            }
+        });
+
+
     }
 
     void refreshComments() {
