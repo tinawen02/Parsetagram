@@ -1,5 +1,6 @@
 package com.example.parsetagram.fragments;
 
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.parsetagram.EndlessRecyclerViewScrollListener;
 import com.example.parsetagram.R;
@@ -20,6 +22,8 @@ import com.example.parsetagram.models.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Date;
