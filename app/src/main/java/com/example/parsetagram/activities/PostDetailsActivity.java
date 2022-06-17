@@ -41,10 +41,10 @@ public class PostDetailsActivity extends AppCompatActivity {
     private ImageButton ibSharePost;
     private TextView tvLikesPost;
     private TextView tvUsernameDescriptionPost;
-    RecyclerView rvComments;
+    private RecyclerView rvComments;
     private CommentsAdapter adapter;
 
-    Post post;
+    private Post post;
 
     @Override
     protected void onRestart() {
@@ -71,16 +71,16 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         adapter = new CommentsAdapter();
 
+        // Debugging this
         // Unwrap the post passed in via intent, using its simple name as a key
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
         String test = getIntent().getStringExtra("test");
 
-
         // Set all views
         //tvUsernamePost.setText(post.getUser().getUsername());
         tvUsernamePost.setText(test);
-
         tvDescriptionPost.setText(post.getDescription());
+        tvLikesPost.setText(post.getLikesCount());
 
         Glide.with(this).load(post.getImage().getUrl())
                 .into(ivPostImagePost);
@@ -90,25 +90,22 @@ public class PostDetailsActivity extends AppCompatActivity {
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimeStampPost.setText(timeAgo);
         //tvUsernameDescriptionPost.setText(post.getUser().getUsername());
+        tvUsernamePost.setText(test);
         rvComments.setLayoutManager(new LinearLayoutManager(this));
         rvComments.setAdapter(adapter);
 
         // Allows a user to comment
-        ibCommentPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(PostDetailsActivity.this, ComposeCommentActivity.class);
-                i.putExtra("post", Parcels.wrap(post));
-                startActivity(i);
-                finish();
-            }
-        });
+        userComment(ibCommentPost);
 
+        // Refreshes the comments
         refreshComments();
 
-        tvLikesPost.setText(post.getLikesCount());
-
         // Allows a user to like
+        userLikes(ibHeartPost);
+
+    }
+
+    private void userLikes(ImageButton ibHeartPost) {
         ibHeartPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,8 +122,18 @@ public class PostDetailsActivity extends AppCompatActivity {
                 tvLikesPost.setText(post.getLikesCount());
             }
         });
+    }
 
-
+    private void userComment(ImageButton ibCommentPost) {
+        ibCommentPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PostDetailsActivity.this, ComposeCommentActivity.class);
+                i.putExtra("post", Parcels.wrap(post));
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
     void refreshComments() {
@@ -138,7 +145,6 @@ public class PostDetailsActivity extends AppCompatActivity {
             @Override
             public void done(List<Comment> objects, ParseException e) {
                 if (e != null) {
-                    Log.e("uh oh: Failed to get comments fro post", e.getMessage());
                     return;
                 }
                 adapter.mComments.addAll(objects);

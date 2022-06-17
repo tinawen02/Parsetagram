@@ -19,9 +19,8 @@ import org.parceler.Parcels;
 
 public class ComposeCommentActivity extends AppCompatActivity {
 
-    Post post;
-    Button btSave;
-    EditText etBody;
+    private Post post;
+    private EditText etBody;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +28,20 @@ public class ComposeCommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comment);
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
-
-        Toast.makeText(this, post.getDescription(), Toast.LENGTH_SHORT).show();
-
-
-        btSave = findViewById(R.id.btSave);
         etBody = findViewById(R.id.etBody);
 
+        // Posts a new comment when a user clicks a button
+        postComment(findViewById(R.id.btSave));
+
+    }
+
+    private void postComment(Button btSave) {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Post the new comment to parse
                 String body = etBody.getText().toString();
-
 
                 Comment comment = new Comment();
                 comment.setAuthor(ParseUser.getCurrentUser());
@@ -60,6 +60,5 @@ public class ComposeCommentActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }

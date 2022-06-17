@@ -19,7 +19,6 @@ import com.parse.SignUpCallback;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String TAG = "LoginActivity";
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
@@ -40,17 +39,21 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnSignup = findViewById(R.id.btnSignup);
 
-        // Listens for a click from the user who is logging in
+        // Logs in the user once a username and password are entered
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "onClick login button");
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 loginUser(username, password);
             }
         });
 
+        // Brings user to sign up for an account if the Signup button is clicked
+        signupUser(btnSignup);
+    }
+
+    private void signupUser(Button btnSignup) {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,21 +66,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser (String username, String password) {
-        Log.i(TAG, "attempting to login user" + username);
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with login", e);
                     return;
                 }
                 // Navigate to the main activity if the user has signed in properly
                 goMainActivity();
-                Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT);
+                Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    // Returns the user to the timeline
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);

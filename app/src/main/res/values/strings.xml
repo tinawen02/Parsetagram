@@ -9,4 +9,16 @@
     <string name="sign_up">Sign up</string>
     <string name="don_t_have_a_login">Don\'t have a login?</string>
     <string name="relative_time">Relative Time</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description2">Description...</string>
+    <string name="take_a_picture2">Take A Picture</string>
+    <string name="post2">Post</string>
+    <string name="logout2">logout</string>
+    <string name="take_a_picture" />
+    <string name="post" />
+    <string name="logout" />
+    <string name="Logout">Logout</string>
+    <string name="Post">Post</string>
+    <string name="Take_a_picture">take a picture</string>
 </resources>

@@ -11,7 +11,6 @@
         android:id="@+id/tvUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         tools:text="rahul" />
 
@@ -33,5 +32,5 @@
         android:id="@+id/tvTimeStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        tools:text="@string/relative_time" />
 </LinearLayout>

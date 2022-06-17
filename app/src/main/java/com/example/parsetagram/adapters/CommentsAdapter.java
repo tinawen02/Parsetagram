@@ -44,8 +44,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     public int getItemCount() { return mComments.size(); }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvAuthor;
-        TextView tvBody;
+        private TextView tvAuthor;
+        private TextView tvBody;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

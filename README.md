@@ -23,9 +23,9 @@ The following **stretch** features are implemented:
 - [X] Style the login page to look like the real Instagram login page.
 - [ ] Style the feed to look like the real Instagram feed.
 - [X] User can load more posts once they reach the bottom of the feed using endless scrolling.
-- [ ] User should switch between different tabs using fragments and a Bottom Navigation View.
-    - [ ] Feed Tab (to view all posts from all users)
-    - [ ] Capture Tab (to make a new post using the Camera and Photo Gallery)
+- [X] User should switch between different tabs using fragments and a Bottom Navigation View.
+    - [X] Feed Tab (to view all posts from all users)
+    - [X] Capture Tab (to make a new post using the Camera and Photo Gallery)
     - [ ] Profile Tab (to view only the current user's posts, in a grid)
 - [X] Show the username and creation time for each post
 - User Profiles:
@@ -44,8 +44,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. 
+2. 
 
 ## Video Walkthrough
 

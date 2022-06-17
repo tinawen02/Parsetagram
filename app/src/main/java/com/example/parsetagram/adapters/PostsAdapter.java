@@ -24,8 +24,8 @@ import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
-    private Context context;
-    private List<Post> posts;
+    private final Context context;
+    private final List<Post> posts;
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
@@ -42,7 +42,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(PostsAdapter.ViewHolder holder, int position) {
         Post post = posts.get(position);
-
         holder.bind(post);
     }
 
@@ -53,14 +52,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvUsername;
-        private ImageView ivImage;
-        private TextView tvDescription;
-        private TextView tvTimeStamp;
+        private final TextView tvUsername;
+        private final ImageView ivImage;
+        private final TextView tvDescription;
+        private final TextView tvTimeStamp;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //itemView.setOnClickListener(this);
+
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
@@ -68,10 +67,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         }
 
         public void bind(Post post) {
+
             // Bind the post data to the view elements
             tvUsername.setText(post.getUser().getUsername());
             tvDescription.setText(post.getDescription());
 
+            // Displays the image the user wants to post
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(image.getUrl()).into(ivImage);
@@ -79,43 +80,27 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 ivImage.setVisibility(View.GONE);
             }
 
+            // Debugging location: poor structure but only way it works
             String test = post.getUser().getUsername();
-
             ivImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PostDetailsActivity.class);
-                    // serialize the movie using parceler, use its short name as a key
+
+                    // Serialize the post using parceler, use its short name as a key
                     intent.putExtra("post", Parcels.wrap(post));
                     intent.putExtra("test",test);
-                    // show the activity
+
+                    // Show the activity
                     context.startActivity(intent);
                 }
             });
 
-            // Calculate relative date
+            // Calculate relative date of the post
             Date createdAt = post.getCreatedAt();
             String timeAgo = Post.calculateTimeAgo(createdAt);
             tvTimeStamp.setText(timeAgo);
         }
-
-       /* @Override
-        public void onClick(View v) {
-            // gets item position
-            int position = getAdapterPosition();
-            // make sure the position is valid, i.e. actually exists in the view
-            if (position != RecyclerView.NO_POSITION) {
-                // get the movie at the position, this won't work if the class is static
-                Post movie = posts.get(position);
-                // create intent for the new activity
-                Intent intent = new Intent(context, PostDetailsActivity.class);
-                // serialize the movie using parceler, use its short name as a key
-                intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(movie));
-                // show the activity
-                context.startActivity(intent);
-            }
-
-        }*/
     }
 
     // Clean all posts of the recycler

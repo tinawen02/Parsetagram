@@ -66,12 +66,10 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void loginUser (String username, String password) {
-        Log.i(TAG, "attempting to login user" + username);
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with login", e);
                     return;
                 }
                 // Navigate to the main activity if the user has signed in properly
