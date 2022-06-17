@@ -1,118 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    tools:context=".activities.PostDetailsActivity">
 
-
+    <ImageView
+        android:id="@+id/ivProfileImageDetails"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/instagram_user_filled_24"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvUsernamePost"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:text="rahul"
-        app:layout_constraintTop_toBottomOf="@+id/ibCommentPost"/>
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImageDetails"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivPostImagePost"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/avatars"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileImageDetails"
+        tools:layout_editor_absoluteX="0dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvUsernameDescriptionPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPost" />
 
-        <ImageButton
-            android:id="@+id/ibCommentPost"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ufi_comment"
-            app:layout_constraintStart_toEndOf="@+id/ibHeartPost"
-            app:srcCompat="@null"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <ImageButton
-            android:id="@+id/ibHeartPost"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ufi_heart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@null"
-            tools:ignore="SpeakableTextPresentCheck"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <ImageButton
-            android:id="@+id/ibSharePost"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/direct"
-            app:layout_constraintStart_toEndOf="@+id/ibCommentPost"
-            app:srcCompat="@null"
-            tools:ignore="SpeakableTextPresentCheck"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvDescriptionPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/tvUsernameDescriptionPost"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPost" />
 
     <TextView
         android:id="@+id/tvLikesPost"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0 likes" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tvUsernameDescriptionPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            tools:text="rahul" />
-
-        <TextView
-            android:id="@+id/tvDescriptionPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            app:layout_constraintStart_toEndOf="@id/tvUsernameDescriptionPost"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="trying to look hipster" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvComments"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:text="0 likes"
+        app:layout_constraintBottom_toTopOf="@+id/tvUsernameDescriptionPost"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPost"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tvTimeStampPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/relative_time"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionPost"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvComments" />
 
+    <LinearLayout
+        android:id="@+id/linearLayoutPost"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImagePost">
 
+        <ImageButton
+            android:id="@+id/ibHeartPost"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ufi_heart" />
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/ibCommentPost"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ufi_comment" />
+
+        <ImageButton
+            android:id="@+id/ibSharePost"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/direct" />
+
+        <ImageButton
+            android:id="@+id/ibSavePost"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="250dp"
+            android:background="@drawable/ufi_save" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvThreeDotsPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="30dp"
+        android:text=". . ."
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@+id/tvUsernamePost"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComments"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionPost" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

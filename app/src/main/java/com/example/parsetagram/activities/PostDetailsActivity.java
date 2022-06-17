@@ -71,16 +71,18 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         adapter = new CommentsAdapter();
 
-        // Debugging this
         // Unwrap the post passed in via intent, using its simple name as a key
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
         String test = getIntent().getStringExtra("test");
 
         // Set all views
-        //tvUsernamePost.setText(post.getUser().getUsername());
         tvUsernamePost.setText(test);
         tvDescriptionPost.setText(post.getDescription());
         tvLikesPost.setText(post.getLikesCount());
+        tvUsernameDescriptionPost.setText(post.getUser().getUsername());
+        tvUsernamePost.setText(test);
+        rvComments.setLayoutManager(new LinearLayoutManager(this));
+        rvComments.setAdapter(adapter);
 
         Glide.with(this).load(post.getImage().getUrl())
                 .into(ivPostImagePost);
@@ -89,10 +91,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         Date createdAt = post.getCreatedAt();
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimeStampPost.setText(timeAgo);
-        //tvUsernameDescriptionPost.setText(post.getUser().getUsername());
-        tvUsernamePost.setText(test);
-        rvComments.setLayoutManager(new LinearLayoutManager(this));
-        rvComments.setAdapter(adapter);
+
 
         // Allows a user to comment
         userComment(ibCommentPost);
