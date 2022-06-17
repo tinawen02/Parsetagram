@@ -7,11 +7,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.parsetagram.EndlessRecyclerViewScrollListener;
 import com.example.parsetagram.R;
 import com.example.parsetagram.adapters.PostsAdapter;
 import com.example.parsetagram.models.Post;
@@ -26,6 +28,8 @@ import java.util.List;
 public class PostsFragment extends Fragment {
 
    private RecyclerView rvPosts;
+   private SwipeRefreshLayout swipeContainer;
+   private EndlessRecyclerViewScrollListener scrollListener;
    protected PostsAdapter adapter;
    protected List<Post> allPosts;
 
@@ -49,17 +53,54 @@ public class PostsFragment extends Fragment {
         adapter = new PostsAdapter(getContext(), allPosts);
 
         // Create the data source
-
         // Set the adapter on the recycler view
         rvPosts.setAdapter(adapter);
 
         // Set the layout manager on the recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Lookup the swipe container view
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+
+        // Allows the user to refresh their timeline to update feed time and posts
+        allowRefreshing(swipeContainer);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rvPosts.setLayoutManager(linearLayoutManager);
+
         // Query the posts
         queryPosts(null);
 
+        // Used to allow endless scrolling
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggers when new data is appended to the list
+                queryPosts(allPosts.get(0).getCreatedAt());
+            }
+        };
 
+        // Adds the scroll listener to RecyclerView
+        rvPosts.addOnScrollListener(scrollListener);
+
+
+    }
+
+    private void allowRefreshing(SwipeRefreshLayout swipeContainer) {
+
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                queryPosts(null);
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     // Gets all of the posts from Parse
@@ -94,6 +135,7 @@ public class PostsFragment extends Fragment {
                 // Save received posts to list and notify adapter of new data
                 //adapter.clear();
                 adapter.addAll(posts);
+                swipeContainer.setRefreshing(false);
                 adapter.notifyDataSetChanged();
             }
         });

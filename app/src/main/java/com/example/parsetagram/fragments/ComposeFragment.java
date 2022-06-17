@@ -72,7 +72,6 @@ public class ComposeFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
-        btnFeed = view.findViewById(R.id.btnFeed);
         etDescription = view.findViewById(R.id.etDescription);
         ivPostImage = view.findViewById(R.id.ivPostImage);
 
@@ -94,9 +93,6 @@ public class ComposeFragment extends Fragment {
 
         // Submits a picture to the feed
         submitPicture(btnSubmit);
-
-        // Takes user to the activity feed upon click
-        toActivityFeed(btnFeed);
     }
 
     private void logoutUser() {
@@ -178,16 +174,6 @@ public class ComposeFragment extends Fragment {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
-    private void toActivityFeed(Button btnFeed) {
-        btnFeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), FeedActivity.class);
-                startActivity(i);
-                //finish();
-            }
-        });
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

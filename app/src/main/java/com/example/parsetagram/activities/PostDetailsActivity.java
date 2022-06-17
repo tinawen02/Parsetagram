@@ -79,7 +79,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         tvUsernamePost.setText(test);
         tvDescriptionPost.setText(post.getDescription());
         tvLikesPost.setText(post.getLikesCount());
-        tvUsernameDescriptionPost.setText(post.getUser().getUsername());
+        tvUsernameDescriptionPost.setText(test);
         tvUsernamePost.setText(test);
         rvComments.setLayoutManager(new LinearLayoutManager(this));
         rvComments.setAdapter(adapter);
@@ -91,7 +91,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         Date createdAt = post.getCreatedAt();
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimeStampPost.setText(timeAgo);
-
 
         // Allows a user to comment
         userComment(ibCommentPost);
