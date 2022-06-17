@@ -115,7 +115,7 @@ public class PostDetailsActivity extends AppCompatActivity {
                 } else {
                     // like
                     post.like();
-                    ibHeartPost.setBackground(getDrawable(R.drawable.ufi_heart_active));
+                    ibHeartPost.setBackground(getDrawable(R.drawable.ic_heart_active));
 
                 }
                 tvLikesPost.setText(post.getLikesCount());

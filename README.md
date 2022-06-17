@@ -1,8 +1,8 @@
-# Project 3 - *Name of App Here*
+# Project 3 - **Parsetagram**
 
-**Name of your app** is a photo sharing app using Parse as its backend.
+**Parsetagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: **25** hours spent in total
 
 ## User Stories
 
@@ -41,11 +41,12 @@ The following **additional** features are implemented:
 
 - [X] Added Instagram icon to home page
 - [X] Resize each photo before uploading to Parse
+- [X] Instagram like button turns red upon a user like
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. 
-2. 
+1. Allowing each user to add a bio to their profile.
+2. Showing a recyclerview of people who liked a certain post.
 
 ## Video Walkthrough
 
@@ -66,9 +67,13 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 Describe any challenges encountered while building the app.
 
+I had a lot of difficulties working with the emulator and parse. On a few occasions, my emulator
+didn't reflect the changes made - and I had to wipe the data off of the emulator. I also had a few 
+challenges working with the bottom navigation bar and implementing each fragment.
+
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2022 Tina Wen
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

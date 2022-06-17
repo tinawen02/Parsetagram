@@ -6,13 +6,14 @@
         <entry key="app/src/main/res/drawable-v24/ufi_heart_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ufi_save_icon.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_heart_active.xml" value="0.171" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_comment.xml" value="0.2922683715820313" />
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.1413373860182371" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2087478637695313" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19461517333984377" />
-        <entry key="app/src/main/res/layout/activity_post_details.xml" value="0.16717325227963525" />
+        <entry key="app/src/main/res/layout/activity_post_details.xml" value="0.23979949951171875" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.31875" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.13855116514690982" />
