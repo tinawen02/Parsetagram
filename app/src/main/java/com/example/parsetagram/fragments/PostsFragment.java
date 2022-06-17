@@ -59,11 +59,8 @@ public class PostsFragment extends Fragment {
         // Set the layout manager on the recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Lookup the swipe container view
-        swipeContainer = view.findViewById(R.id.swipeContainer);
-
-        // Allows the user to refresh their timeline to update feed time and posts
-        allowRefreshing(swipeContainer);
+        // Allows the user to refresh their timeline to update feed time and post
+        allowRefreshing(view);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvPosts.setLayoutManager(linearLayoutManager);
@@ -83,19 +80,22 @@ public class PostsFragment extends Fragment {
         // Adds the scroll listener to RecyclerView
         rvPosts.addOnScrollListener(scrollListener);
 
-
     }
 
-    private void allowRefreshing(SwipeRefreshLayout swipeContainer) {
-
+    protected void allowRefreshing(View view) {
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                adapter.clear();
                 queryPosts(null);
             }
         });
-
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,

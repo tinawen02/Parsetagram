@@ -38,7 +38,6 @@ public class PostDetailsActivity extends AppCompatActivity {
     private TextView tvTimeStampPost;
     private ImageButton ibCommentPost;
     private ImageButton ibHeartPost;
-    private ImageButton ibSharePost;
     private TextView tvLikesPost;
     private TextView tvUsernameDescriptionPost;
     private RecyclerView rvComments;
@@ -64,7 +63,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         tvTimeStampPost = findViewById(R.id.tvTimeStampPost);
         ibCommentPost = findViewById(R.id.ibCommentPost);
         ibHeartPost = findViewById(R.id.ibHeartPost);
-        ibSharePost = findViewById(R.id.ibSharePost);
         tvUsernameDescriptionPost = findViewById(R.id.tvUsernameDescriptionPost);
         rvComments = findViewById(R.id.rvComments);
         tvLikesPost = findViewById(R.id.tvLikesPost);
